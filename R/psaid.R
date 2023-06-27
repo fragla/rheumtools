@@ -19,6 +19,7 @@
 #' @param shame numeric. Level of embarrassment and/or shame due to appearance experienced during the last week (0: none to 10: extreme).
 #' @param social numeric. Difficulties participating fully in social activities due to PsA during the last week (0: none to 10: extreme).
 #' @param depression numeric. Level of depression due to PsA experienced during the last week (0: none to 10: extreme).
+#' @param digits numeric specifying the number of decimal places. Defaults to 1.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
 #' @return PSAID-12 score.
@@ -167,6 +168,7 @@ psaid_12_score <- function(pain, fatigue, skin, work, functional, discomfort, sl
 #' @param sleep numeric. Sleep difficulties (i.e. resting at night) due to PsA during the last week (0: no difficulty to 10: extreme difficulty).
 #' @param coping numeric. Coping (manage, deal, make do) with PsA during the last week (0: very well to 10: very poorly).
 #' @param anxiety numeric. Level of anxiety, fear and uncertainty due to your PsA during the last week (0: none to 10: extreme).
+#' @param digits numeric specifying the number of decimal places. Defaults to 1.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
 #' @return PSAID-9 score.

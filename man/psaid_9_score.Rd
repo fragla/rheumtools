@@ -14,7 +14,8 @@ psaid_9_score(
   sleep,
   coping,
   anxiety,
-  digits = 1
+  digits = 1,
+  ignore = TRUE
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ psaid_9_score(
 \item{coping}{numeric. Coping (manage, deal, make do) with PsA during the last week (0: very well to 10: very poorly).}
 
 \item{anxiety}{numeric. Level of anxiety, fear and uncertainty due to your PsA during the last week (0: none to 10: extreme).}
+
+\item{digits}{numeric specifying the number of decimal places. Defaults to 1.}
 
 \item{ignore}{boolean ignore incorrect parameter values and return NA.}
 }

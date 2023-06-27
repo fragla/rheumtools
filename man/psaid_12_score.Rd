@@ -17,7 +17,8 @@ psaid_12_score(
   shame,
   social,
   depression,
-  digits = 1
+  digits = 1,
+  ignore = TRUE
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ psaid_12_score(
 \item{social}{numeric. Difficulties participating fully in social activities due to PsA during the last week (0: none to 10: extreme).}
 
 \item{depression}{numeric. Level of depression due to PsA experienced during the last week (0: none to 10: extreme).}
+
+\item{digits}{numeric specifying the number of decimal places. Defaults to 1.}
 
 \item{ignore}{boolean ignore incorrect parameter values and return NA.}
 }
