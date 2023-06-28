@@ -99,7 +99,7 @@ dates_to_duration <- function(date1, date2) {
     return(NA)
   }
 
-  if (!is.Date(date1) || !is.Date(date2)) {
+  if (!is_date(date1) || !is_date(date2)) {
     stop("Non-date object found.")
   }
 

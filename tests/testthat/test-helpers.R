@@ -20,3 +20,14 @@ test_that("is_date gives correct answer", {
   expect_false(is_date("2010-01-01"))
   expect_false(is_date(2010-01-01))
 })
+
+test_that("is_date gives correct answer", {
+  expect_true(is_date(as.Date("2010-01-01")))
+  expect_true(is_date(as.Date("12/01/1999", format="%m/%d/%Y")))
+  expect_false(is_date("2010-01-01"))
+  expect_false(is_date(2010-01-01))
+})
+
+test_that("dates_to_duration gives correct answer", {
+  expect_equal(dates_to_duration(as.Date("2020-01-01"), as.Date("12/01/2020", format="%d/%m/%Y")), 11)
+})
