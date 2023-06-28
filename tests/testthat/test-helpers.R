@@ -7,9 +7,16 @@ test_that("Percentage response gives correct answer", {
 })
 
 test_that("Percentage response throws error for incorrect parameters", {
-  expect_equal(percentage_response(c(12, 18), c(3, NA), ignore = FALSE))
-  expect_equal(percentage_response(c(12, 18), 3, ignore = FALSE))
+  expect_error(percentage_response(c(12, 18), c(3, NA), ignore = FALSE))
+  expect_error(percentage_response(c(12, 18), 3, ignore = FALSE))
   expect_error(percentage_response(12, "A", ignore = FALSE))
   expect_error(percentage_response(-4, "B", ignore = FALSE))
   expect_error(percentage_response(NA, NA, ignore = FALSE))
+})
+
+test_that("is_date gives correct answer", {
+  expect_true(is_date(as.Date("2010-01-01")))
+  expect_true(is_date(as.Date("12/01/1999", format="%m/%d/%Y")))
+  expect_false(is_date("2010-01-01"))
+  expect_false(is_date(2010-01-01))
 })

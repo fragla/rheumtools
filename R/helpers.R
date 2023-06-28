@@ -51,12 +51,12 @@ percentage_response <- function(score1, score2, ignore = TRUE) {
 #' @examples
 #' date <- as.Date("2010-01-01")
 #'
-#' is.Date(date)
+#' is_date(date)
 #'
 #' @export
-is.Date <- function(x) inherits(x, 'Date')
+is_date <- function(x) inherits(x, 'Date')
 
-is.empty <- function(x) {
+is_empty <- function(x) {
   if(length(x)==0) {
     return(TRUE)
   }
