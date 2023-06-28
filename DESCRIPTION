@@ -9,6 +9,7 @@ Description: A selection of functions that can be used in the analysis of clinic
 License: MIT + file LICENSE
 Encoding: UTF-8
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 URL: https://github.com/fragla/rheumtools
 BugReports: https://github.com/fragla/rheumtools/issues
