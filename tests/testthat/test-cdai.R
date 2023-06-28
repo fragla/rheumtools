@@ -29,3 +29,19 @@ test_that("CDAI classification throws error for incorrect parameters", {
   expect_error(cdai_classification(-4, ignore = FALSE))
   expect_error(cdai_classification(NA, ignore = FALSE))
 })
+
+test_that("CDAI response gives correct answer", {
+  expect_equal(cdai_response(9), "None")
+  expect_equal(cdai_response(52.7), "Minor")
+  expect_equal(cdai_response(78.7), "Moderate")
+  expect_equal(cdai_response(99.2), "Major")
+  expect_equal(dapsa_response(c(88, 10, 53, 79)), c("Major", "None", "Minor", "Moderate"))
+  expect_equal(dapsa_response(NA), NA_character_)
+  expect_equal(dapsa_response("Major"), NA_character_)
+})
+
+test_that("CDAI response throws error for incorrect parameters", {
+  expect_error(dapsa_response(c(88, NA, 53, 79), ignore = FALSE))
+  expect_error(dapsa_response("Moderate", ignore = FALSE))
+  expect_error(dapsa_response(NA, ignore = FALSE))
+})
