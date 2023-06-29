@@ -43,6 +43,7 @@ test_that("PsAID-9 throws error for incorrect parameters", {
   expect_error(psaid_9_score(8, 10, 6, 6, 6, 9, 9, 11, 10, ignore = FALSE))
   expect_error(psaid_9_score(8, 10, 6, 6, 6, 9, 9, 5, "A", ignore = FALSE))
   expect_error(psaid_9_score(8, 10, 6, 6, 6, 9, 9, 5, ignore = FALSE))
+  expect_error(psaid_9_score(6:7, 2:3, 5:6, 9:10, 0:1, 8:9, 1, 4:5, 6:7))
 })
 
 test_that("PsAID-12 gives correct answer", {
@@ -103,4 +104,5 @@ test_that("PsAID-12 throws error for incorrect parameters", {
   expect_error(psaid_12_score(8, 10, 6, 6, 6, 9, 9, 5, 10, 8, -1, 1, ignore = FALSE))
   expect_error(psaid_12_score(8, 10, 6, 6, 6, 9, 9, 5, 10, 8, 6, 11, ignore = FALSE))
   expect_error(psaid_12_score(8, 10, 6, 6, 6, 9, 9, 5, 10, 8, 6, "A", ignore = FALSE))
+  expect_error(psaid_12_score(6:7, 2:3, 5:6, 9:10, 0, 8:9, 1:2, 4:5, 6:7, 3:4, 5:6, 7:8))
 })
