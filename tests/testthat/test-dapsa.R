@@ -31,6 +31,7 @@ test_that("Clinical DAPSA throws error for incorrect parameters", {
   expect_error(clinical_dapsa_score(tjc=4,sjc="A",pain=7,ptgh=6, ignore = FALSE))
   expect_error(clinical_dapsa_score(tjc=4,sjc=5,pain="B",ptgh=6, ignore = FALSE))
   expect_error(clinical_dapsa_score(tjc=4,sjc=5,pain=7,ptgh="C", ignore = FALSE))
+  expect_error(clinical_dapsa_score(tjc=4:5,sjc=5,pain=7:8,ptgh=6:7))
 })
 
 test_that("DAPSA classification gives correct answer", {
