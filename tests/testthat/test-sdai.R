@@ -17,6 +17,7 @@ test_that("SDAI throws error for incorrect parameters", {
   expect_error(sdai_score(tjc=26,sjc=26,ptgh=5,phgh=12,crp=7, ignore = FALSE))
   expect_error(sdai_score(tjc=26,sjc=26,ptgh=-5,phgh=10,crp=7, ignore = FALSE))
   expect_error(sdai_score(tjc=26,sjc=26,ptgh=5,phgh=10,crp=-2, ignore = FALSE))
+  expect_error(sdai_score(tjc=4:5,sjc=5:6,ptgh=5:6,phgh=6:7,crp=7))
 })
 
 test_that("SDAI classification gives correct answer", {
