@@ -16,6 +16,7 @@ test_that("BASDAI throws error for incorrect parameters", {
   expect_error(basdai_score(1, 2, NA, 4, 5, 10, ignore = FALSE))
   expect_error(basdai_score(1, 2, 3, "B", 5, 10, ignore = FALSE))
   expect_error(basdai_score(1, 2, 3, 4, 52, 10, ignore = FALSE))
+  expect_error(basdai_score(1, 2, 3, 4, 10, 12, ignore = FALSE))
   expect_error(basdai_score(1:2, 2, 3, 4, 5, 1, ignore = FALSE))
 })
 
