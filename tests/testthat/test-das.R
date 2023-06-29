@@ -29,6 +29,7 @@ test_that("DAS28-CRP throws error for incorrect parameters", {
   expect_error(das_28_crp_score(4,NA,7,50, ignore = FALSE))
   expect_error(das_28_crp_score(4,5,NA,50, ignore = FALSE))
   expect_error(das_28_crp_score(4,5,7,NA, ignore = FALSE))
+  expect_error(das_28_crp_score(4:5,5:6,7,50:51))
 })
 
 test_that("DAS28 disease activity classification gives correct answer", {
@@ -65,5 +66,6 @@ test_that("EULAR response disease activity classification throws error for incor
   expect_error(eular_ra_response(5.21, NA, ignore = FALSE))
   expect_error(eular_ra_response(NA, NA, ignore = FALSE))
   expect_error(eular_ra_response("A", 1.9, ignore = FALSE))
+  expect_error(eular_ra_response(c(5.21, 7.19), 1.80))
 })
 
