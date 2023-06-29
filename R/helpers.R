@@ -56,30 +56,6 @@ percentage_response <- function(score1, score2, ignore = TRUE) {
 #' @export
 is_date <- function(x) inherits(x, 'Date')
 
-is_empty <- function(x) {
-  if(length(x)==0) {
-    return(TRUE)
-  }
-
-  if(is.na(x)) {
-    return(TRUE)
-  }
-
-  if(is.null(x)) {
-    return(TRUE)
-  }
-
-  if(is.nan(x)) {
-    return(TRUE)
-  }
-
-  if (is.character(x) && nchar(gsub("[[:space:]]", "", x))==0) {
-    return(TRUE)
-  }
-
-  return(FALSE)
-}
-
 #' Calculate the duration between two dates in days.
 #'
 #' Calculates how the duration in days between two dates.
@@ -111,11 +87,4 @@ dates_to_duration <- function(date1, date2) {
 .equal_lengths <- function(...) {
   args <- list(...)
   return(var(lengths(args)) == 0)
-}
-
-.replace_na_with_mean <- function(...) {
-  x <- unlist(list(...))
-  m <- mean(x, na.rm = TRUE)
-  x[is.na(x)] <- m
-  return(x)
 }
