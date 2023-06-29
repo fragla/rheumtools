@@ -2,6 +2,8 @@ test_that("DAS28-ESR gives correct answer", {
   expect_equal(das_28_esr_score(4,5,7,50), 3.81)
   expect_equal(das_28_esr_score(NA,5,7,50), NA_real_)
   expect_equal(das_28_esr_score(4,"A",7,50), NA_real_)
+  expect_equal(das_28_esr_score(4,5,"A",50), NA_real_)
+  expect_equal(das_28_esr_score(4,5,7,"A"), NA_real_)
   expect_equal(das_28_esr_score(4:5,5:6,7:8,50:51), c(3.81, 4.11))
 })
 
@@ -10,12 +12,15 @@ test_that("DAS28-ESR throws error for incorrect parameters", {
   expect_error(das_28_esr_score(4,NA,7,50, ignore = FALSE))
   expect_error(das_28_esr_score(4,5,NA,50, ignore = FALSE))
   expect_error(das_28_esr_score(4,5,7,NA, ignore = FALSE))
+  expect_error(das_28_esr_score(4:5,5:6,7:8,50))
 })
 
 test_that("DAS28-CRP gives correct answer", {
   expect_equal(das_28_crp_score(4,5,7,50), 4.15)
   expect_equal(das_28_crp_score(NA,5,7,50), NA_real_)
   expect_equal(das_28_crp_score(4,"A",7,50), NA_real_)
+  expect_equal(das_28_crp_score(4,5,"A",50), NA_real_)
+  expect_equal(das_28_crp_score(4,5,7,"A"), NA_real_)
   expect_equal(das_28_crp_score(4:5,5:6,7:8,50:51), c(4.15, 4.40))
 })
 
