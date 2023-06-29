@@ -86,15 +86,11 @@ das_28_esr_score <- function(tjc, sjc, esr, ptgh, digits = 2, ignore = TRUE) {
 
   tjc <- suppressWarnings(as.numeric(tjc))
   sjc <- suppressWarnings(as.numeric(sjc))
-  crp <- suppressWarnings(as.numeric(esr))
+  esr <- suppressWarnings(as.numeric(esr))
   ptgh <- suppressWarnings(as.numeric(ptgh))
 
   if(!.equal_lengths(tjc, sjc, esr, ptgh)) {
     stop("tjc, sjc, esr and ptgh are not the same length.")
-  }
-
-  if(!.equal_lengths(tjc, sjc, crp, ptgh)) {
-    stop("tjc, sjc, crp and ptgh are not the same length.")
   }
 
   if(any(is.na(tjc) | tjc < 0 | tjc > 28)) {
