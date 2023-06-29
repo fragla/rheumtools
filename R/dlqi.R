@@ -137,7 +137,7 @@ dlqi_main_categories <- function() {
 }
 
 dlqi_q7_categories <- function() {
-  return(c("yes" = 3, "a lot" = 2, "a little" = 1, "not at all" = 0))
+  return(c("yes" = 3, "a lot" = 2, "a little" = 1, "not at all" = 0, "not relevant" = 0))
 }
 
 #' Calculate DLQI classification
