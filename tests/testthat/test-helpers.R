@@ -30,4 +30,10 @@ test_that("is_date gives correct answer", {
 
 test_that("dates_to_duration gives correct answer", {
   expect_equal(dates_to_duration(as.Date("2020-01-01"), as.Date("12/01/2020", format="%d/%m/%Y")), 11)
+  expect_equal(dates_to_duration(as.Date("2020-01-01"), NA), NA)
+})
+
+test_that("dates_to_duration throws error for incorrect parameters", {
+  expect_error(dates_to_duration(as.Date("2020-01-01"), "12/01/2020"))
+  expect_error(dates_to_duration("2019-05-06", as.Date("2020-01-01")))
 })
