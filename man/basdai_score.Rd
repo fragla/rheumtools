@@ -7,17 +7,23 @@
 basdai_score(q1, q2, q3, q4, q5, q6, digits = 1, ignore = TRUE)
 }
 \arguments{
-\item{q1}{numeric question 1 answer (0 to 10).}
+\item{q1}{numeric question 1: How would you describe the overall level of
+fatigue/tiredness you have experienced?}
 
-\item{q2}{numeric question 2 answer (0 to 10).}
+\item{q2}{numeric question 2: How would you describe the overall level of
+AS neck, back or hip pain you have had?}
 
-\item{q3}{numeric question 3 answer (0 to 10).}
+\item{q3}{numeric question 3: How would you describe the overall level of
+pain/swelling in joints other than neck, back or hips you have had?}
 
-\item{q4}{numeric question 4 answer (0 to 10).}
+\item{q4}{numeric question 4: How would you describe the overall level of
+discomfort you have had from any areas tender to touch or pressure?}
 
-\item{q5}{numeric question 5 answer (0 to 10).}
+\item{q5}{numeric question 5: How would you describe the overall level of
+morning stiffness you have had from the time you wake up?}
 
-\item{q6}{numeric question 6 answer (0 to 10).}
+\item{q6}{numeric question 6: How long does your morning stiffness last from
+the time you wake up?}
 
 \item{digits}{numeric the number of decimal places. Defaults to 1.}
 
@@ -27,7 +33,8 @@ basdai_score(q1, q2, q3, q4, q5, q6, digits = 1, ignore = TRUE)
 Body Mass Index
 }
 \description{
-Calculate the Bath Ankylosing Spondylitis Disease Activity Index scores
+Calculate the Bath Ankylosing Spondylitis Disease Activity Index scores.
+Questions scored from 0 (none) to 10 (very severe).
 }
 \examples{
 basdai_score(q1 = 1, q2 = 2, q3 = 3, q4 = 4, q5 = 5, q6 = 10)

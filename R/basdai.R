@@ -1,13 +1,20 @@
 #' Calculate BASDAI scores
 #'
-#' Calculate the Bath Ankylosing Spondylitis Disease Activity Index scores
+#' Calculate the Bath Ankylosing Spondylitis Disease Activity Index scores.
+#' Questions scored from 0 (none) to 10 (very severe).
 #'
-#' @param q1 numeric question 1 answer (0 to 10).
-#' @param q2 numeric question 2 answer (0 to 10).
-#' @param q3 numeric question 3 answer (0 to 10).
-#' @param q4 numeric question 4 answer (0 to 10).
-#' @param q5 numeric question 5 answer (0 to 10).
-#' @param q6 numeric question 6 answer (0 to 10).
+#' @param q1 numeric question 1: How would you describe the overall level of
+#' fatigue/tiredness you have experienced?
+#' @param q2 numeric question 2: How would you describe the overall level of
+#' AS neck, back or hip pain you have had?
+#' @param q3 numeric question 3: How would you describe the overall level of
+#' pain/swelling in joints other than neck, back or hips you have had?
+#' @param q4 numeric question 4: How would you describe the overall level of
+#' discomfort you have had from any areas tender to touch or pressure?
+#' @param q5 numeric question 5: How would you describe the overall level of
+#' morning stiffness you have had from the time you wake up?
+#' @param q6 numeric question 6: How long does your morning stiffness last from
+#' the time you wake up?
 #' @param digits numeric the number of decimal places. Defaults to 1.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
