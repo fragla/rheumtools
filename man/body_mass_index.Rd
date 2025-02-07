@@ -4,12 +4,15 @@
 \alias{body_mass_index}
 \title{Calculate Body Mass Index}
 \usage{
-body_mass_index(weight, height, digits = 1, ignore = TRUE)
+body_mass_index(weight, height, metric = TRUE, digits = 1, ignore = TRUE)
 }
 \arguments{
-\item{weight}{numeric weight in kilograms.}
+\item{weight}{numeric weight.}
 
-\item{height}{numeric height in metres.}
+\item{height}{numeric height.}
+
+\item{metric}{logical metric units (kilograms/metres) rather than imperial
+(pounds/inches) Default is TRUE.}
 
 \item{digits}{numeric the number of decimal places. Defaults to 1.}
 

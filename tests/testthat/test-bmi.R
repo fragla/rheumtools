@@ -1,5 +1,6 @@
 test_that("BMI gives correct answer", {
   expect_equal(body_mass_index(height = 1.8, weight = 85), 26.2)
+  expect_equal(body_mass_index(height = 65, weight = 150, metric = FALSE, digits = 2), 24.96)
   expect_equal(body_mass_index(height = 1.8, weight = NA), NA_real_)
   expect_equal(body_mass_index(height = NA, weight = 85), NA_real_)
   expect_equal(body_mass_index(height = c(1.75, 1.52), weight = c(78, 55.2)), c(25.5, 23.9))

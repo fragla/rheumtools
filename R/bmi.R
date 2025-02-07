@@ -2,8 +2,10 @@
 #'
 #' Calculate Body Mass Index using weight in kilograms and height in metres.
 #'
-#' @param weight numeric weight in kilograms.
-#' @param height numeric height in metres.
+#' @param weight numeric weight.
+#' @param height numeric height.
+#' @param metric logical metric units (kilograms/metres) rather than imperial
+#' (pounds/inches) Default is TRUE.
 #' @param digits numeric the number of decimal places. Defaults to 1.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
@@ -13,7 +15,7 @@
 #' body_mass_index(weight = 70, height = 1.75)
 #'
 #' @export
-body_mass_index <- function(weight, height, digits = 1, ignore = TRUE) {
+body_mass_index <- function(weight, height, metric = TRUE, digits = 1, ignore = TRUE) {
   weight <- suppressWarnings(as.numeric(weight))
   height <- suppressWarnings(as.numeric(height))
 
@@ -29,8 +31,8 @@ body_mass_index <- function(weight, height, digits = 1, ignore = TRUE) {
     }
   }
 
-  if(any(!is.na(height) & height > 2.5)) {
-    warning("Check heights are not in centimetres.")
+  if(any(!is.na(height) & metric & height > 2.5)) {
+    warning("Check heights are not in centimetres or inches.")
   }
 
   if(any(is.na(weight) | weight < 0)) {
@@ -41,7 +43,13 @@ body_mass_index <- function(weight, height, digits = 1, ignore = TRUE) {
     }
   }
 
-  round(weight / height^2, digits = digits)
+  bmi <- weight / height^2
+
+  if(!metric) {
+    bmi <- bmi * 703
+  }
+
+  round(bmi, digits = digits)
 }
 
 #' Classify Body Mass Index
