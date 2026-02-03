@@ -1,6 +1,6 @@
 #' Calculate Body Mass Index
 #'
-#' Calculate Body Mass Index using weight in kilograms and height in metres.
+#' Calculate Body Mass Index using weight and height.
 #'
 #' @param weight numeric weight.
 #' @param height numeric height.
@@ -32,7 +32,7 @@ body_mass_index <- function(weight, height, metric = TRUE, digits = 1, ignore = 
   }
 
   if(any(!is.na(height) & metric & height > 2.5)) {
-    warning("Check heights are not in centimetres or inches.")
+    warning("Check heights are not in centimetres or inches.", call. = FALSE)
   }
 
   if(any(is.na(weight) | weight < 0)) {
