@@ -4,7 +4,7 @@
 \alias{dapsa_score}
 \title{Calculate DAPSA score}
 \usage{
-dapsa_score(tjc, sjc, pain, ptgh, crp, digits = 0, ignore = TRUE)
+dapsa_score(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore = TRUE)
 }
 \arguments{
 \item{tjc}{numeric Tender 68 joint count (0 to 68).}
@@ -15,9 +15,11 @@ dapsa_score(tjc, sjc, pain, ptgh, crp, digits = 0, ignore = TRUE)
 
 \item{ptgh}{numeric Patient Global Health VAS score (0 to 10cm).}
 
-\item{crp}{numeric C-reactive protein (CRP) in mg/l.}
+\item{crp}{numeric C-reactive protein (CRP) in mg/dl.}
 
 \item{digits}{numeric specifying the number of decimal places. Defaults to 0.}
+
+\item{crp_unit}{character specifying either 'mg/L' or 'mg/dL'.}
 
 \item{ignore}{boolean ignore incorrect parameter values and return NA.}
 }

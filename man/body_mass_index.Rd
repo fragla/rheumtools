@@ -22,7 +22,7 @@ body_mass_index(weight, height, metric = TRUE, digits = 1, ignore = TRUE)
 Body Mass Index
 }
 \description{
-Calculate Body Mass Index using weight in kilograms and height in metres.
+Calculate Body Mass Index using weight and height.
 }
 \examples{
 body_mass_index(weight = 70, height = 1.75)
