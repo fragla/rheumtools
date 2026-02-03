@@ -30,7 +30,7 @@ DAPSA score.
 Calculate the Disease Activity Index for Psoriatic Arthritis.
 }
 \examples{
-dapsa_score(tjc = 4, sjc = 5, pain = 2.5, ptgh = 5, crp = 7)
-dapsa_score(tjc = 28, sjc = 28, pain = 10, ptgh = 10, crp = 10)
+dapsa_score(tjc = 4, sjc = 5, pain = 2.5, ptgh = 5, crp = 7, crp_unit = "mg/dL")
+dapsa_score(tjc = 28, sjc = 28, pain = 10, ptgh = 10, crp = 10, crp_unit = "mg/dL")
 
 }

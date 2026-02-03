@@ -14,8 +14,8 @@
 #' @return DAPSA score.
 #'
 #' @examples
-#' dapsa_score(tjc = 4, sjc = 5, pain = 2.5, ptgh = 5, crp = 7)
-#' dapsa_score(tjc = 28, sjc = 28, pain = 10, ptgh = 10, crp = 10)
+#' dapsa_score(tjc = 4, sjc = 5, pain = 2.5, ptgh = 5, crp = 7, crp_unit = "mg/dL")
+#' dapsa_score(tjc = 28, sjc = 28, pain = 10, ptgh = 10, crp = 10, crp_unit = "mg/dL")
 #'
 #' @export
 dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore = TRUE) {
