@@ -54,7 +54,7 @@ dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore 
     if(ignore) {
       crp[ is.na(crp) | crp < 0 ] <- NA
     } else {
-      stop("CRP value must be ≥ 0.")
+      stop("CRP value must be \u2265 0.")
     }
   }
 
