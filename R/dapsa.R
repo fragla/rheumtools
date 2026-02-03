@@ -6,8 +6,9 @@
 #' @param sjc numeric Swollen 66 joint count (0 to 66).
 #' @param pain numeric Pain VAS (0 to 10cm).
 #' @param ptgh numeric Patient Global Health VAS score (0 to 10cm).
-#' @param crp numeric C-reactive protein (CRP) in mg/l.
+#' @param crp numeric C-reactive protein (CRP) in mg/dl.
 #' @param digits numeric specifying the number of decimal places. Defaults to 0.
+#' @param crp_unit character specifying either 'mg/L' or 'mg/dL'.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
 #' @return DAPSA score.
@@ -17,7 +18,11 @@
 #' dapsa_score(tjc = 28, sjc = 28, pain = 10, ptgh = 10, crp = 10)
 #'
 #' @export
-dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, ignore = TRUE) {
+dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore = TRUE) {
+
+  if(is.na(crp_unit) || !crp_unit %in% c('mg/L', 'mg/dL')){
+    stop("crp_units must be one of 'mg/L' or 'mg/dL'")
+  }
 
   tjc <- suppressWarnings(as.numeric(tjc))
   sjc <- suppressWarnings(as.numeric(sjc))
@@ -49,7 +54,7 @@ dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, ignore = TRUE) {
     if(ignore) {
       crp[ is.na(crp) | crp < 0 ] <- NA
     } else {
-      stop("CRP value must be greater than 0.")
+      stop("CRP value must be ≥ 0.")
     }
   }
 
@@ -67,6 +72,14 @@ dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, ignore = TRUE) {
     } else {
       stop("Patient global VAS must be between 0 and 10.")
     }
+  }
+
+  if (crp_unit == "mg/L") {
+    crp <- crp / 10
+  }
+
+  if (any(crp > 10, na.rm = TRUE)) {
+    warning("Some CRP values > 10 mg/dL detected; confirm units (common mix-up with mg/L).", call. = FALSE)
   }
 
   dapsa <- round(tjc + sjc + pain + ptgh + crp, digits = digits)
