@@ -158,7 +158,7 @@ das_28_classification <- function(das, ignore = TRUE) {
   activity <- rep(NA_character_, length(das))
   activity[das >= 0] <- "Remission"
   activity[das >= 2.6] <- "Low"
-  activity[das >= 3.2] <- "Moderate"
+  activity[das > 3.2] <- "Moderate"
   activity[das > 5.1] <- "High"
 
   return(activity)
