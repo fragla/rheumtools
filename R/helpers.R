@@ -84,7 +84,8 @@ dates_to_duration <- function(date1, date2) {
   return(duration)
 }
 
-.equal_lengths <- function(...) {
-  args <- list(...)
-  return(var(lengths(args)) == 0)
+.equal_lengths <- function(..., zero_ok = FALSE) {
+  lens <- vapply(list(...), length, integer(1))
+  if (!zero_ok && any(lens == 0L)) return(FALSE)
+  all(lens == lens[1])
 }
