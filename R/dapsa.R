@@ -54,7 +54,7 @@ dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore 
     if(ignore) {
       crp[ is.na(crp) | crp < 0 ] <- NA
     } else {
-      stop("CRP value must be \u2265 0.")
+      stop("CRP value must be >= 0.")
     }
   }
 
@@ -79,7 +79,7 @@ dapsa_score <- function(tjc, sjc, pain, ptgh, crp, digits = 0, crp_unit, ignore 
   }
 
   if (any(crp > 10, na.rm = TRUE)) {
-    warning("Some CRP values > 10 mg/dL detected; confirm units (common mix-up with mg/L).", call. = FALSE)
+    warning("Some CRP values > 10 detected; confirm units (common mix-up with mg/L).", call. = FALSE)
   }
 
   dapsa <- round(tjc + sjc + pain + ptgh + crp, digits = digits)
