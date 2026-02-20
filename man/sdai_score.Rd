@@ -4,7 +4,7 @@
 \alias{sdai_score}
 \title{Calculate SDAI score}
 \usage{
-sdai_score(tjc, sjc, ptgh, phgh, crp, digits = 0, ignore = TRUE)
+sdai_score(tjc, sjc, ptgh, phgh, crp, crp_unit, digits = 0, ignore = TRUE)
 }
 \arguments{
 \item{tjc}{numeric Tender 28 joint count (0 to 28).}
@@ -17,6 +17,8 @@ sdai_score(tjc, sjc, ptgh, phgh, crp, digits = 0, ignore = TRUE)
 
 \item{crp}{numeric C-reactive protein (CRP) in mg/dl.}
 
+\item{crp_unit}{character specifying either 'mg/L' or 'mg/dL'.}
+
 \item{digits}{numeric specifying the number of decimal places. Defaults to 0.}
 
 \item{ignore}{boolean ignore incorrect parameter values and return NA.}
@@ -28,8 +30,8 @@ SDAI score.
 Calculate the Simple Disease Activity Index.
 }
 \examples{
-sdai_score(tjc = 4, sjc = 5, ptgh = 5, phgh = 6, crp=7)
-sdai_score(tjc = 4, sjc = 5, ptgh = 10, phgh = 8, crp=3)
+sdai_score(tjc = 4, sjc = 5, ptgh = 5, phgh = 6, crp=7, crp_unit = "mg/L")
+sdai_score(tjc = 4, sjc = 5, ptgh = 10, phgh = 8, crp=3, crp_unit = "mg/dL")
 
 }
 \references{

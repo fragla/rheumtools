@@ -7,6 +7,7 @@
 #' @param ptgh numeric Patient Global Health VAS score (0 to 10cm).
 #' @param phgh numeric Physician Global Health VAS score (0 to 10cm).
 #' @param crp numeric C-reactive protein (CRP) in mg/dl.
+#' @param crp_unit character specifying either 'mg/L' or 'mg/dL'.
 #' @param digits numeric specifying the number of decimal places. Defaults to 0.
 #' @param ignore boolean ignore incorrect parameter values and return NA.
 #'
@@ -15,11 +16,16 @@
 #' @references \url{http://www.ncbi.nlm.nih.gov/pubmed/16273793}
 #'
 #' @examples
-#' sdai_score(tjc = 4, sjc = 5, ptgh = 5, phgh = 6, crp=7)
-#' sdai_score(tjc = 4, sjc = 5, ptgh = 10, phgh = 8, crp=3)
+#' sdai_score(tjc = 4, sjc = 5, ptgh = 5, phgh = 6, crp=7, crp_unit = "mg/L")
+#' sdai_score(tjc = 4, sjc = 5, ptgh = 10, phgh = 8, crp=3, crp_unit = "mg/dL")
 #'
 #' @export
-sdai_score <- function(tjc, sjc, ptgh, phgh, crp, digits = 0, ignore = TRUE) {
+sdai_score <- function(tjc, sjc, ptgh, phgh, crp, crp_unit, digits = 0, ignore = TRUE) {
+
+  if(is.na(crp_unit) || !crp_unit %in% c('mg/L', 'mg/dL')){
+    stop("crp_units must be one of 'mg/L' or 'mg/dL'")
+  }
+
   tjc <- suppressWarnings(as.numeric(tjc))
   sjc <- suppressWarnings(as.numeric(sjc))
   ptgh <- suppressWarnings(as.numeric(ptgh))
@@ -68,6 +74,14 @@ sdai_score <- function(tjc, sjc, ptgh, phgh, crp, digits = 0, ignore = TRUE) {
     } else {
       stop("CRP value must be greater than 0.")
     }
+  }
+
+  if (crp_unit == "mg/L") {
+    crp <- crp / 10
+  }
+
+  if (any(crp > 10, na.rm = TRUE)) {
+    warning("Some CRP values > 10 detected; confirm units (common mix-up with mg/L).", call. = FALSE)
   }
 
   round(tjc + sjc + ptgh + phgh + crp, digits) #range is 0 to 76.
