@@ -67,25 +67,69 @@ esr_classification <- function(esr, age, sex, ignore = TRUE) {
 
 #' Classify C-reactive protein
 #'
-#' Classify C-reactive protein (CRP) as either positive or negative
-#' based on CRP value.
+#' Classifies C-reactive protein (CRP) values into standard or hs-CRP categories,
+#' or using a custom numeric cutoff.
 #'
 #' @param crp numeric C-reactive protein (mg/dL)
-#' @param cutoff CRP cutoff for positive/negative classicication.
-#' @param ignore boolean ignore incorrect parameter values and return NA.
+#' @param cutoff optional numeric cutoff for binary classification. If provided, `mode` is ignored.
+#' @param crp_unit character 'mg/L' or 'mg/dL'. Required unless `cutoff` is provided.
+#' @param mode character specifying either 'standard' (default) or 'hs' classification. Required unless cutoff is provided.
+#' @param ignore boolean If TRUE, negative or NA CRP values are set to NA. If FALSE, an error is thrown.
 #'
-#' @return CRP classification - Positive or Negative
+#' @return CRP classification - Positive or Negative OR Normal, Normal or minor
+#' elevation, Moderate elevation, Marked elevation, Severe elevation
 #'
 #' @examples
-#' crp_classification(crp = 16)
+#' # Standard CRP in mg/L
+#' crp_classification(c(2, 8, 25, 120), crp_unit = "mg/L")
+#'
+#' # hs-CRP in mg/L
+#' crp_classification(c(0.5, 2, 5, 12), crp_unit = "mg/L", mode = "hs")
+#'
+#' # custom cutoff
 #' crp_classification(crp = 12, cutoff = 10)
 #'
-#' @source Nehring SM, Goyal A, Patel BC. C Reactive Protein. 2023 Jul 10.
-#' In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing;
-#' 2025 Jan–. PMID: 28722873.
+#' @source
+#' Ridker PM, et al. "C-reactive protein and cardiovascular risk in apparently
+#' healthy men and women." *New England Journal of Medicine*, 2000;342:836–843.
+#'
+#' Pearson TA, et al. "Markers of inflammation and cardiovascular disease:
+#' application to clinical and public health practice." *Circulation*, 2003;107:499–511.
+#'
+#' Nehring SM, Goyal A, Patel BC. "C Reactive Protein." 2023 Jul 10.
+#' In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan–.
+#' PMID: 28722873.
+#'
+#' Clinical CRP thresholds (standard CRP):
+#' Normal <0.3 mg/dL, Minor 0.3–1 mg/dL, Moderate 1–10 mg/dL,
+#' Marked 10–50 mg/dL, Severe >50 mg/dL.
+#'
+#' hs-CRP thresholds (cardiovascular risk):
+#' Low risk <1 mg/L, Average risk 1–3 mg/L, High risk >3mg/L
+#' >10 mg/L (may indicate acute inflammation; repeat test recommended).
 #'
 #' @export
-crp_classification <- function(crp, cutoff = NULL, ignore = TRUE) {
+crp_classification <- function(crp, cutoff = NULL, crp_unit = NULL, mode = c("standard", "hs"), ignore = TRUE) {
+
+  mode <- match.arg(mode)
+
+  if(is.null(crp_unit) && is.null(cutoff)){
+    stop("Either crp_unit or cutoff must be provided.")
+  }
+
+  # validate cutoff (if provided)
+  if (!is.null(cutoff)) {
+
+    cutoff <- suppressWarnings(as.numeric(cutoff))
+
+    if (is.na(cutoff) || length(cutoff) != 1) {
+      stop("cutoff must be a single numeric value.")
+    }
+
+    if (cutoff < 0) {
+      stop("cutoff must be >= 0.")
+    }
+  }
 
   crp <- suppressWarnings(as.numeric(crp))
 
@@ -100,20 +144,58 @@ crp_classification <- function(crp, cutoff = NULL, ignore = TRUE) {
   if(!is.null(cutoff)) {
     crp_status <- .cutoff_classification(crp, cutoff = cutoff)
   } else {
-    crp_status <- .multi_classification(crp)
+    if (mode =="standard") {
+      crp_status <- .multi_classification(crp, crp_unit)
+    } else if (mode == "hs") {
+      crp_status <- .hs_classification(crp, crp_unit)
+    }
   }
 
   return(crp_status)
 }
 
-.multi_classification <- function(crp) {
+.multi_classification <- function(crp, crp_unit) {
+
+  if(is.null(crp_unit) || !crp_unit %in% c('mg/L', 'mg/dL')){
+    stop("crp_units must be one of 'mg/L' or 'mg/dL'")
+  }
+
+  if (crp_unit == "mg/L") {
+    crp <- crp / 10
+  }
 
   crp_status <- rep(NA_character_, length(crp))
+
   crp_status[crp < 0.3] <- "Normal"
   crp_status[crp >= 0.3 & crp < 1] <- "Normal or minor elevation"
   crp_status[crp >= 1 & crp < 10] <- "Moderate elevation"
-  crp_status[crp >= 10] <- "Marked elevation"
+  crp_status[crp >= 10 & crp < 50] <- "Marked elevation"
   crp_status[crp >= 50] <- "Severe elevation"
+
+  return(crp_status)
+}
+
+.hs_classification <- function(crp, crp_unit) {
+
+  if (is.null(crp_unit) || !crp_unit %in% c("mg/L", "mg/dL")) {
+    stop("crp_unit must be one of 'mg/L' or 'mg/dL'")
+  }
+
+  # Ensure everything in mg/L (hs-CRP thresholds are in mg/L)
+  if (crp_unit == "mg/dL") {
+    crp <- crp * 10
+  }
+
+  # Issue warning for very high values
+  if (any(crp > 10, na.rm = TRUE)) {
+    warning("hs-CRP > 10 mg/L detected: may indicate acute inflammation. Consider repeating after resolution.")
+  }
+
+  crp_status <- rep(NA_character_, length(crp))
+
+  crp_status[crp < 1] <- "Low risk"
+  crp_status[crp >= 1 & crp <= 3] <- "Average risk"
+  crp_status[crp > 3] <- "High risk"
 
   return(crp_status)
 }

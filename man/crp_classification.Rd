@@ -4,29 +4,60 @@
 \alias{crp_classification}
 \title{Classify C-reactive protein}
 \source{
-Nehring SM, Goyal A, Patel BC. C Reactive Protein. 2023 Jul 10.
-In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing;
-2025 Jan–. PMID: 28722873.
+Ridker PM, et al. "C-reactive protein and cardiovascular risk in apparently
+healthy men and women." *New England Journal of Medicine*, 2000;342:836–843.
+
+Pearson TA, et al. "Markers of inflammation and cardiovascular disease:
+application to clinical and public health practice." *Circulation*, 2003;107:499–511.
+
+Nehring SM, Goyal A, Patel BC. "C Reactive Protein." 2023 Jul 10.
+In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan–.
+PMID: 28722873.
+
+Clinical CRP thresholds (standard CRP):
+Normal <0.3 mg/dL, Minor 0.3–1 mg/dL, Moderate 1–10 mg/dL,
+Marked 10–50 mg/dL, Severe >50 mg/dL.
+
+hs-CRP thresholds (cardiovascular risk):
+Low risk <1 mg/L, Average risk 1–3 mg/L, High risk >3mg/L
+>10 mg/L (may indicate acute inflammation; repeat test recommended).
 }
 \usage{
-crp_classification(crp, cutoff = NULL, ignore = TRUE)
+crp_classification(
+  crp,
+  cutoff = NULL,
+  crp_unit = NULL,
+  mode = c("standard", "hs"),
+  ignore = TRUE
+)
 }
 \arguments{
 \item{crp}{numeric C-reactive protein (mg/dL)}
 
-\item{cutoff}{CRP cutoff for positive/negative classicication.}
+\item{cutoff}{optional numeric cutoff for binary classification. If provided, `mode` is ignored.}
 
-\item{ignore}{boolean ignore incorrect parameter values and return NA.}
+\item{crp_unit}{character 'mg/L' or 'mg/dL'. Required unless `cutoff` is provided.}
+
+\item{mode}{character specifying either 'standard' (default) or 'hs' classification. Required unless cutoff is provided.}
+
+\item{ignore}{boolean If TRUE, negative or NA CRP values are set to NA. If FALSE, an error is thrown.}
 }
 \value{
-CRP classification - Positive or Negative
+CRP classification - Positive or Negative OR Normal, Normal or minor
+elevation, Moderate elevation, Marked elevation, Severe elevation
 }
 \description{
-Classify C-reactive protein (CRP) as either positive or negative
-based on CRP value.
+Classifies C-reactive protein (CRP) values into standard or hs-CRP categories,
+or using a custom numeric cutoff.
 }
 \examples{
-crp_classification(crp = 16)
+# Standard CRP in mg/L
+crp_classification(c(2, 8, 25, 120), crp_unit = "mg/L")
+
+# hs-CRP in mg/L
+crp_classification(c(0.5, 2, 5, 12), crp_unit = "mg/L", mode = "hs")
+
+# custom cutoff
 crp_classification(crp = 12, cutoff = 10)
 
 }

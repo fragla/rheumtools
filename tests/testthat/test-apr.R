@@ -20,17 +20,22 @@ test_that("ESR classification throws error for incorrect parameters", {
 })
 
 test_that("CRP classification gives correct answer", {
-  expect_equal(crp_classification(crp = 0.1), "Normal")
-  expect_equal(crp_classification(crp = 0.8), "Normal or minor elevation")
-  expect_equal(crp_classification(crp = 5), "Moderate elevation")
-  expect_equal(crp_classification(crp = c(11, 55)), c("Marked elevation", "Severe elevation"))
+  expect_equal(crp_classification(crp = 0.1, crp_unit = "mg/dL"), "Normal")
+  expect_equal(crp_classification(crp = 1, crp_unit = "mg/L"), "Normal")
+  expect_equal(crp_classification(crp = 0.8, crp_unit = "mg/dL"), "Normal or minor elevation")
+  expect_equal(crp_classification(crp = 5, crp_unit = "mg/dL"), "Moderate elevation")
+  expect_equal(crp_classification(crp = c(11, 55), crp_unit = "mg/dL"), c("Marked elevation", "Severe elevation"))
   expect_equal(crp_classification(crp = 11, cutoff = 10), "Positive")
   expect_equal(crp_classification(crp = 0.8, cutoff = 11), "Negative")
-  expect_equal(crp_classification(crp = NA), NA_character_)
+  expect_equal(crp_classification(crp = NA, crp_unit = "mg/dL"), NA_character_)
   expect_equal(crp_classification(crp = NA, cutoff = 11), NA_character_)
+  expect_equal(crp_classification(crp = c(0.3, 1, 10, 50), crp_unit = "mg/dL"), c("Normal or minor elevation", "Moderate elevation", "Marked elevation", "Severe elevation"))
+  expect_equal(crp_classification(crp = c(NA, 5), crp_unit = "mg/L"), c(NA, "Normal or minor elevation"))
 })
 
 test_that("CRP classification throws error for incorrect parameters", {
   expect_error(crp_classification(crp = NA, ignore = FALSE))
   expect_error(crp_classification(crp = NA, cutoff = 11, ignore = FALSE))
+  expect_error(crp_classification(crp = c(5, -10), crp_unit = "mg/L", ignore = FALSE))
+  expect_error(crp_classification(c(NA, 5), crp_unit = "mg/dL", ignore = FALSE))
 })
