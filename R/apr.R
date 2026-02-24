@@ -98,7 +98,7 @@ esr_classification <- function(esr, age, sex, ignore = TRUE) {
 #' application to clinical and public health practice." *Circulation*, 2003;107:499–511.
 #'
 #' Clinical CRP thresholds (standard CRP):
-#' Normal <0.3 mg/dL, Minor 0.3–1 mg/dL, Moderate 1–10 mg/dL,
+#' Normal <0.3 mg/dL, Normal or minor 0.3–1 mg/dL, Moderate 1–10 mg/dL,
 #' Marked 10–50 mg/dL, Severe >50 mg/dL.
 #'
 #' hs-CRP thresholds (cardiovascular risk):
