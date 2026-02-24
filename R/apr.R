@@ -90,15 +90,12 @@ esr_classification <- function(esr, age, sex, ignore = TRUE) {
 #' crp_classification(crp = 12, cutoff = 10)
 #'
 #' @source
-#' Ridker PM, et al. "C-reactive protein and cardiovascular risk in apparently
-#' healthy men and women." *New England Journal of Medicine*, 2000;342:836–843.
+#' Singh B, Goyal A, Patel BC. C-Reactive Protein: Clinical Relevance and Interpretation. [Updated 2025 May 3].
+#' In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan-.
+#' Available from: https://www.ncbi.nlm.nih.gov/books/NBK441843/
 #'
 #' Pearson TA, et al. "Markers of inflammation and cardiovascular disease:
 #' application to clinical and public health practice." *Circulation*, 2003;107:499–511.
-#'
-#' Nehring SM, Goyal A, Patel BC. "C Reactive Protein." 2023 Jul 10.
-#' In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan–.
-#' PMID: 28722873.
 #'
 #' Clinical CRP thresholds (standard CRP):
 #' Normal <0.3 mg/dL, Minor 0.3–1 mg/dL, Moderate 1–10 mg/dL,
